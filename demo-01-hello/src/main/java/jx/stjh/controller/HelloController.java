@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     //@RequestMapping("/hello")
+    // @ApiIgnore   //屏蔽swagger接口说明
     @ApiOperation("swagger 方法!")  //swagger方法
-    //@ApiIgnore   //屏蔽swagger接口说明
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         return "hello springboot！！";
     }
 }
