@@ -21,6 +21,8 @@
 6、集成Druid数据源：（访问：localhost:8080/druid/index.html）
    (为监控而生的DB池，阿里开源的JDBC应用组件，主要包含三部分)
    
-7、log4j集成
+7、log4j集成1111
+
+8  ,zhet
 
 8、冲突（GitHub）
