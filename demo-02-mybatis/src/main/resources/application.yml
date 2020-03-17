@@ -38,3 +38,6 @@ spring:
       useGlobalDataSourceStat: true
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
+mybatis:
+  type-aliases-package: jx.stjh.demo02mybatis.model
+  mapper-locations: classpath:mapper/*.xml  #classpath就是应用程序resources的路径
