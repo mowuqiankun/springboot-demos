@@ -1,5 +1,7 @@
 package jx.stjh.demo02mybatis.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import jx.stjh.demo02mybatis.model.SysUser;
 
 import java.util.List;
@@ -12,5 +14,5 @@ import java.util.List;
 public interface SysUserService {
     List<SysUser> findAll();
 
-
+    PageInfo<SysUser> selectByPage(Integer page,Integer size);
 }
