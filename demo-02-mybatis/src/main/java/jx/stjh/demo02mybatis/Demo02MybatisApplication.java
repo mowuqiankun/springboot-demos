@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-//@ComponentScan(basePackages = {"jx.stjh.demo02mybatis.*"})
 @SpringBootApplication
 @MapperScan("jx.stjh.demo02mybatis.dao")    // 扫描mybatis DAO
 public class Demo02MybatisApplication {
