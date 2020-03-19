@@ -12,6 +12,13 @@ public interface SysUserMapper {
 
     SysUser selectByPrimaryKey(Long id);
 
+    /**
+     * 通过用户名获取用户对象
+     * @param userName
+     * @return
+     */
+    SysUser selectByUserName(String userName);
+
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);

@@ -40,4 +40,9 @@ public class SysUserServiceImpl implements SysUserService {
         List<SysUser> sysUserList = this.sysUserMapper.findAll();
         return new PageInfo<SysUser>(sysUserList);
     }
+
+    @Override
+    public SysUser selectByUserName(String userName) {
+        return sysUserMapper.selectByUserName(userName);
+    }
 }

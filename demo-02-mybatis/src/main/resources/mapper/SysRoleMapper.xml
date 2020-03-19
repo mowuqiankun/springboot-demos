@@ -14,12 +14,22 @@
   <sql id="Base_Column_List" >
     id, name, remark, create_by, create_time, last_update_by, last_update_time, del_flag
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+  <select id="findSysRoleByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
+    sys_role.*
+    from sys_role,sys_user_role,sys_user
+    where sys_user.id = sys_user_role.user_id AND sys_user_role.role_id = sys_role.id
+    and sys_user.name = #{userName}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
     <include refid="Base_Column_List" />
     from sys_role
     where id = #{id,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from sys_role
     where id = #{id,jdbcType=BIGINT}

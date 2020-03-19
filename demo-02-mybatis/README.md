@@ -29,3 +29,5 @@
 8、集成pagehelper插件
   1、pom.xml引入pagehelper-spring-boot-starter，注意与Springboot版本号；
   2、application.yml加入 pagehelper相关配置；
+  
+  9、引入shiro权限框架

@@ -2,6 +2,8 @@ package jx.stjh.demo02mybatis.dao;
 
 import jx.stjh.demo02mybatis.model.SysMenu;
 
+import java.util.List;
+
 public interface SysMenuMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,10 @@ public interface SysMenuMapper {
     int updateByPrimaryKeySelective(SysMenu record);
 
     int updateByPrimaryKey(SysMenu record);
+
+    /**
+     * @param userName
+     * @return
+     */
+    List<SysMenu> getMenuListByUserName(String userName);
 }
