@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jx.stjh.demo03complete.dao.SysUserDao">
+
+    <resultMap type="jx.stjh.demo03complete.entity.SysUser" id="SysUserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="salt" column="salt" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastUpdateBy" column="last_update_by" jdbcType="VARCHAR"/>
+        <result property="lastUpdateTime" column="last_update_time" jdbcType="TIMESTAMP"/>
+        <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap type="jx.stjh.demo03complete.entity.SysUserRole" id="SysUserRoleMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="roleId" column="role_id" jdbcType="INTEGER"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastUpdateBy" column="last_update_by" jdbcType="VARCHAR"/>
+        <result property="lastUpdateTime" column="last_update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap type="jx.stjh.demo03complete.entity.SysMenu" id="SysMenuMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="url" column="url" jdbcType="VARCHAR"/>
+        <result property="perms" column="perms" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="INTEGER"/>
+        <result property="icon" column="icon" jdbcType="VARCHAR"/>
+        <result property="orderNum" column="order_num" jdbcType="INTEGER"/>
+        <result property="createBy" column="create_by" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="lastUpdateBy" column="last_update_by" jdbcType="VARCHAR"/>
+        <result property="lastUpdateTime" column="last_update_time" jdbcType="TIMESTAMP"/>
+        <result property="delFlag" column="del_flag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_SysUser_List">
+    id, name, nick_name, avatar, password, salt, email, mobile, status, dept_id, create_by,
+    create_time, last_update_by, last_update_time, del_flag
+  </sql>
+
+    <select id="findSysRoleByUserName" resultMap="SysUserRoleMap" parameterType="java.lang.String">
+    select
+    sys_role.*
+    from sys_role,sys_user_role,sys_user
+    where sys_user.id = sys_user_role.user_id AND sys_user_role.role_id = sys_role.id
+    and sys_user.name = #{userName}
+  </select>
+
+
+    <select id="getMenuListByUserName" resultMap="SysMenuMap" parameterType="java.lang.String">
+    select
+    sys_menu.*
+    from sys_user,sys_user_role,sys_role,sys_role_menu,sys_menu
+    where sys_user.id = sys_user_role.user_id
+        AND sys_user_role.role_id = sys_role.id
+        AND sys_role.id = sys_role_menu.role_id
+        AND sys_role_menu.menu_id = sys_menu.id
+        AND sys_user.name = #{userName}
+  </select>
+
+
+</mapper>
