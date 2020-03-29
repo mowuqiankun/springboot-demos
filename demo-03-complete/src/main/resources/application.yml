@@ -1,0 +1,81 @@
+#访问端口号
+server:
+  port: 8080
+
+#数据库相关配置-----------------------------begin
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mango?characterEncoding=UTF-8
+    username: root
+    password: rootroot
+    druid:
+      # 下面为连接池的补充设置，应用到上面所有数据源中
+      # 初始连接数
+      initialSize: 5
+      # 最小连接池数量
+      minIdle: 10
+      # 最大连接池数量
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      # 配置一个连接在池中最大生存的时间，单位是毫秒
+      maxEvictableIdleTimeMillis: 900000
+      # 配置检测连接是否有效
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：用于防火墙，防御sql注入；
+      filters: stat,wall,log4j
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+      # 配置监控服务器
+      statViewServlet:
+        enabled: true
+        # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
+        # 设置白名单，不填则允许所有访问
+        allow:
+        # 设置黑名单
+        #deny:
+        url-pattern: /druid/*
+        # 控制台管理用户名和密码
+        login-username: zlk
+        login-password: zlk
+        reset-enable: false
+
+        # 添加过滤规则
+      webStatFilter:
+        enabled: true
+        url-pattern: /*
+          忽略过滤格式
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+
+
+# ====================MybatisPlus====================
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/**.xml  #classpath就是应用程序resources的路径
+  typeAliasesPackage: jx.stjh.demo03complete.**.entity #实体扫描，多个package用逗号或者分号分隔
+
+  # 以下配置均有默认值,可以不设置
+  global-config:
+    db-config:
+      #主键类型 AUTO:"数据库ID自增" INPmysql-demo.sqlUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: uuid
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
