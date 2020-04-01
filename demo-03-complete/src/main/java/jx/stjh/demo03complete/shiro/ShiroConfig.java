@@ -1,6 +1,7 @@
 package jx.stjh.demo03complete.shiro;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
-    private static Logger logger = Logger.getLogger(ShiroConfig.class);
+    private static final Logger logger = LogManager.getLogger(ShiroConfig.class);
 
     /**
      * 注入 Shiro 过滤器

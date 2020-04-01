@@ -2,6 +2,10 @@
 server:
   port: 8080
 
+#log4j2
+logging:
+  config: classpath:log4j2.xml
+
 #数据库相关配置-----------------------------begin
 spring:
   datasource:
@@ -33,8 +37,9 @@ spring:
       testOnReturn: false
       # 打开PSCache，并且指定每个连接上PSCache的大小
       poolPreparedStatements: true
-      #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：用于防火墙，防御sql注入；
-      filters: stat,wall,log4j
+      #配置监控统计拦截的filters，stat:监控统计、log4j2：日志记录、wall：用于防火墙，防御sql注入；
+      #如果应用了log4j2，记得修改
+      filters: stat,wall,log4j2
       maxPoolPreparedStatementPerConnectionSize: 20
       useGlobalDataSourceStat: true
       # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
